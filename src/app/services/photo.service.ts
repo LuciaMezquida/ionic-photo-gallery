@@ -53,10 +53,22 @@ export class PhotoService {
 
   // Use webPath to display the new image instead of base64 since it's
   // already loaded into memory
-  return {
-    filepath: fileName,
-    webviewPath: cameraPhoto.webPath
-  };
+  if (this.platform.is('hybrid')) {
+    // Display the new image by rewriting the 'file://' path to HTTP
+    // Details: https://ionicframework.com/docs/building/webview#file-protocol
+    return {
+      filepath: savedFile.uri,
+      webviewPath: Capacitor.convertFileSrc(savedFile.uri),
+    };
+  }
+  else {
+    // Use webPath to display the new image instead of base64 since it's
+    // already loaded into memory
+    return {
+      filepath: fileName,
+      webviewPath: cameraPhoto.webPath
+    };
+  }
   }
   public photos: Photo[] = [];
   private PHOTO_STORAGE: string = "photos";
