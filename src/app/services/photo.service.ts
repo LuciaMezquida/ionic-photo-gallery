@@ -4,10 +4,23 @@ import { Plugins, CameraResultType, Capacitor, FilesystemDirectory,
 
 const { Camera, Filesystem, Storage } = Plugins;
 
+
 @Injectable({
   providedIn: 'root'
+  
 })
-export class PhotoService {
 
-  constructor() { }
+export class PhotoService {
+  public async addNewToGallery() {
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri, 
+      source: CameraSource.Camera, 
+      quality: 100 
+    });
+  }
+  
+  constructor() { 
+
+  }
 }
