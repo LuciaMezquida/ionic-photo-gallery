@@ -24,3 +24,7 @@ export class PhotoService {
 
   }
 }
+export interface Photo {
+  filepath: string;
+  webviewPath: string;
+}
