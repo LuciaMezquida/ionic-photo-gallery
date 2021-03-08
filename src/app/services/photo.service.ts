@@ -11,6 +11,7 @@ const { Camera, Filesystem, Storage } = Plugins;
 })
 
 export class PhotoService {
+  public photos: Photo[] = [];
   public async addNewToGallery() {
     // Take a photo
     const capturedPhoto = await Camera.getPhoto({
