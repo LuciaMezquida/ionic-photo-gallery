@@ -19,6 +19,10 @@ export class PhotoService {
       source: CameraSource.Camera, 
       quality: 100 
     });
+    this.photos.unshift({
+      filepath: "soon...",
+      webviewPath: capturedPhoto.webPath
+    });
   }
   
   constructor() { 
