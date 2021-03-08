@@ -60,6 +60,10 @@ export class PhotoService {
       filepath: "soon...",
       webviewPath: capturedPhoto.webPath
     });
+    Storage.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(this.photos)
+    });
   }
   
   constructor() { 
