@@ -13,11 +13,22 @@ const { Camera, Filesystem, Storage } = Plugins;
 
 export class PhotoService {
   private async readAsBase64(cameraPhoto: CameraPhoto) {
+      // "hybrid" will detect Cordova or Capacitor
+  if (this.platform.is('hybrid')) {
+    // Read the file into base64 format
+    const file = await Filesystem.readFile({
+      path: cameraPhoto.path
+    });
+
+    return file.data;
+  }
+  else {
     // Fetch the photo, read as a blob, then convert to base64 format
-    const response = await fetch(cameraPhoto.webPath!);
+    const response = await fetch(cameraPhoto.webPath);
     const blob = await response.blob();
-  
-    return await this.convertBlobToBase64(blob) as string;  
+
+    return await this.convertBlobToBase64(blob) as string;
+  } 
   }
   
   convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
